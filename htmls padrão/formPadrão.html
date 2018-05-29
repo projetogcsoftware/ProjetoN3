@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CRUD de teste</title>
+
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
+
+
+</head>
+    <body>
+        <script src="//maxcdn.bootstrapcdn.com/js/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/js/bootstrap.min.js"></script>
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Sistema de Comanda</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Lançar Pedido</a></li>
+                        <li><a href="{% url 'lista_produto' %}">Produtos</a></li>
+                        <li><a href="#">Clientes</a></li>
+                        <li><a href="#">Logof</a></li>
+                        <li><a href="#">Fechar Conta</a></li>
+                        <li><a href="#">Sair</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <br>
+        <div id="main" class="container-fluid">
+
+            <h1 class="page-header">Produtos</h1>
+
+            <div id="top" class="row">
+                <div class="col-md-3">
+                    <h2>Itens</h2>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="input-group h2">
+                        <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar Itens">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit" href="{% url 'lista_produto_nome' %}" >
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="{% url 'cria_produto' %}" class="btn btn-primary pull-right h2">Novo Item</a>
+                </div>
+            </div>
+
+
+            <div id="list" class="row">
+
+                <div class="table-responsive col-md-12">
+                    <table class="table table-striped" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Descrição</th>
+                                <th>Preço</th>
+                                <th class="actions">Ações</th>
+                             </tr>
+                        </thead>
+                        <tbody>
+                            {% for lista in prod %}
+                                <tr>
+
+                                    <td> {{ lista.id }}</td>
+                                    <td> {{ lista.nome }} </td>
+                                    <td> {{ lista.descricao }}</td>
+                                    <td> {{ lista.preco }} </td>
+
+                                    <td class="actions">
+                                        <a class="btn btn-success btn-xs" href="{% url 'altera_produto' lista.id %}">Editar</a>
+                                        <a class="btn btn-warning btn-xs" href="{% url 'altera_produto' lista.id %}">Visualisar</a>
+                                        <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                     </table>
+
+                 </div>
+             </div> <!-- /#list -->
+
+        </div>
+
+    </body>
+</html>
