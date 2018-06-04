@@ -1,15 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Usuario
 from .forms import UsuarioForm
 
 # Create your views here.
 
 def lista_usuario(request):
-    usu = Usuario.objects.all()
-    return render(request, 'usuario.html',{'usu': usu})
+    usu =  Usuario.objects.all()
+    return render(request, 'pedido.html',{'usu': usu})
 
-def teste(request):
-    return HttpResponse("Testando sa bosta")
+
 
 def cria_usuario(request):
     form = UsuarioForm(request.POST or None)

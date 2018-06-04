@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CRUD de teste</title>
+
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
+
+
+</head>
+    <body>
+        <script src="//maxcdn.bootstrapcdn.com/js/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/js/bootstrap.min.js"></script>
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Sistema de Comanda</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Lançar Pedido</a></li>
+                        <li><a href="{% url 'lista_produto' %}">Produtos</a></li>
+                        <li><a href="{% url 'lista_produto' %}">Clientes</a></li>
+                        <li><a href="#">Logof</a></li>
+                        <li><a href="#">Fechar Conta</a></li>
+                        <li><a href="#">Sair</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <br>
+        <div id="main" class="container-fluid">
+
+            <h1 class="page-header">Venda </h1>
+
+            <div id="top" class="row">
+                <div class="col-md-3">
+                    <h2>Itens</h2>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="input-group h2">
+                                <select class="selectpicker" >
+                                <option value="Lanches" href="" >Lanches</option>
+                                <option value="Pizzas" href="" >Pizza</option>
+                                <option value="Bebidas" href="" >Bebidas</option>
+                            </select>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="list" class="row">
+
+                <div class="table-responsive col-md-12">
+                    <table class="table table-striped" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <th>ID Prod</th>
+                                <th>Descrição</th>
+                                <th>Preço</th>
+                                <th class="actions">Ações</th>
+                             </tr>
+                        </thead>
+                        <tbody>
+                            {% for lista in usu%}
+                                <tr>
+
+                                    <td> {{ lista.id }}</td>
+                                    <td> {{ lista.nome }} </td>
+                                    <td> {{ lista.cpf }} </td>
+                                    <td class="actions">
+                                        <input type="button" class="btn btn-warning btn-xs"  value=" - " onclick="menos( 'quantidade1' )">
+                                        <input type="text" name="quantidade" id="quantidade1" value="0" size="1" readonly="readonly" />
+                                        <input type= "button" class="btn btn-warning btn-xs"  value=" + " onclick="mais( 'quantidade1' )">
+
+                                        <a class="btn btn-success btn-xs" href="{% url 'altera_usuario' lista.id %}">Lançar</a>
+                                   </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                     </table>
+
+                 </div>
+             </div> <!-- /#list -->
+
+
+            <!-- /#Itens selecionados -->
+            <div id="listPedido" class="row">
+
+                <div class="col-md-3">
+                    <h2>Itens Lançados</h2>
+                </div>
+                <div class="table-responsive col-md-12">
+                    <table class="table table-striped" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <th>ID Prod</th>
+                                <th>Descrição</th>
+                                <th>QTD</th>
+                                <th>VL. Unit</th>
+                                <th>VL. Total</th>
+                                <th class="actions">Ações</th>
+                             </tr>
+                        </thead>
+                        <tbody>
+                            {% for lista in usu%}
+                                <tr>
+
+                                    <td> {{ lista.id }}</td>
+                                    <td> {{ lista.nome }} </td>
+                                    <td> {{ lista.cpf }} </td>
+                                    <td> {{ lista.endereco }}</td>
+                                    <td> {{ lista.endereco }}</td>
+
+                                    <td class="actions">
+                                        <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Remover</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                     </table>
+
+                 </div>
+             </div> <!-- /#list -->
+
+           <div class="col-md-3">
+               <a href="#" class="btn btn-success btn-xs" >Lançar</a>
+               <a href="#" data-toggle="modal" class="btn btn-danger btn-xs"  data-target="#delete-modal">Cancelar</a>
+
+                </div>
+        </div>
+
+        <script type="text/javascript">
+            function id( el ){
+                return document.getElementById( el );
+            }
+            function menos( id_qnt ) {
+                var qnt = parseInt( id( id_qnt ).value );
+                if( qnt > 0 )
+                id( id_qnt ).value = qnt - 1;
+            }
+            function mais( id_qnt ){
+                id( id_qnt ).value = parseInt( id( id_qnt ).value ) + 1;
+            }
+    </script>
+
+    </body>
+</html>

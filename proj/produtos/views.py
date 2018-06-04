@@ -39,6 +39,7 @@ def lista_produto_nome(request, nome):
 def deleta_produto(request, id):
     prod = Produto.objects.get(id=id)
 
+
     if request.method == 'POST':
         prod.delete()
         return redirect('lista_produto')
