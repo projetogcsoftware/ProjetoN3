@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from .models import Usuario
 from .forms import UsuarioForm
 
-# Create your views here.
-
 def lista_usuario(request):
     usu =  Usuario.objects.all()
     return render(request, 'pedido.html',{'usu': usu})
