@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <h2 class="page-header">Tem certeza que deseja excluir {{prod.nome}} ?</h2>
+        <a href="{% url 'lista_produto' %}" class="btn btn-default">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Confirma</button>
+
+    </form>
+</body>
+</html>
