@@ -58,7 +58,6 @@
                                 <option value="Pizzas" href="" >Pizza</option>
                                 <option value="Bebidas" href="" >Bebidas</option>
                             </select>
-
                     </div>
                 </div>
 
@@ -77,27 +76,28 @@
                              </tr>
                         </thead>
                         <tbody>
-                            {% for lista in usu%}
-                                <tr>
 
+                            {% for lista in prod %}
+
+                                <tr>
                                     <td> {{ lista.id }}</td>
-                                    <td> {{ lista.nome }} </td>
-                                    <td> {{ lista.cpf }} </td>
+                                    <td> {{ lista.descricao }} </td>
+                                    <td> {{ lista.preco }} </td>
                                     <td class="actions">
                                         <input type="button" class="btn btn-warning btn-xs"  value=" - " onclick="menos( 'quantidade1' )">
                                         <input type="text" name="quantidade" id="quantidade1" value="0" size="1" readonly="readonly" />
                                         <input type= "button" class="btn btn-warning btn-xs"  value=" + " onclick="mais( 'quantidade1' )">
 
-                                        <a class="btn btn-success btn-xs" href="{% url 'altera_usuario' lista.id %}">Lançar</a>
-                                   </td>
+                                        <a class="btn btn-success btn-xs" href="">Lançar</a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>
-                     </table>
+
+                    </table>
 
                  </div>
              </div> <!-- /#list -->
-
 
             <!-- /#Itens selecionados -->
             <div id="listPedido" class="row">
@@ -118,14 +118,15 @@
                              </tr>
                         </thead>
                         <tbody>
-                            {% for lista in usu%}
-                                <tr>
 
+                        {% for lista in prod %}
+
+                                <tr>
                                     <td> {{ lista.id }}</td>
-                                    <td> {{ lista.nome }} </td>
-                                    <td> {{ lista.cpf }} </td>
-                                    <td> {{ lista.endereco }}</td>
-                                    <td> {{ lista.endereco }}</td>
+                                    <td> produto {{ lista.descricao }} </td>
+                                    <td> 1 </td>
+                                    <td> {{ lista.preco }}</td>
+                                    <td> {{ lista.preco }}</td>
 
                                     <td class="actions">
                                         <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Remover</a>
@@ -145,7 +146,7 @@
                 </div>
         </div>
 
-        <script type="text/javascript">
+        <script type="text/javascript"> 
             function id( el ){
                 return document.getElementById( el );
             }

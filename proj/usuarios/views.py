@@ -4,7 +4,7 @@ from .forms import UsuarioForm
 
 def lista_usuario(request):
     usu =  Usuario.objects.all()
-    return render(request, 'pedido.html',{'usu': usu})
+    return render(request, 'usuario.html',{'usu': usu})
 
 
 
