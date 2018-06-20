@@ -1,22 +1,11 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,reverse
 from produtos.models import Produto
-from .forms import VendaForm
-from .models import Venda
+from .forms import VendaForm,MesaForm
+from .models import Venda,Mesa
 
 def lista_venda(request):
     prod =  Produto.objects.all()
     return render(request, 'pedido-form.html',{'prod': prod})
-
-
-def lista_venda_pedido(id,mesa,desc,qtd,vl_t,vl_u,listaPedido, request):
-    prod =  Produto.objects.all()
-    listaPedido.append(id,
-                   mesa,
-                   desc,
-                   qtd,
-                   vl_t,
-                   vl_u)
-    return render(request, 'pedido-form.html',{'prod': prod,'listaPedido': listaPedido,'Venda': Venda})
 
 def lista_venda_pedidotemp(Venda,listaPedido, request):
     prod =  Produto.objects.all()
@@ -28,17 +17,37 @@ def lista_venda_pedidotemp(Venda,listaPedido, request):
                    Venda.valor_unit)
     return render(request, 'pedido-form.html',{'prod': prod,'listaPedido': listaPedido,'Venda': Venda})
 
-def add_produto(obj,request):
-    listaPedido = obj
-
-def cria_venda(request):
+def cria_venda(request,mesa):
     prod = Produto.objects.all()
     form = VendaForm(request.POST or None)
 
     if form.is_valid():
         form.save()
-        return redirect('lista_Venda')
-    return render(request, 'pedido-form.html', {'form': form,'prod': prod})
+        return redirect(reverse(('cria_venda'), kwargs={'mesa': mesa}))
+    return render(request, 'pedido-form.html', {'form': form,'prod': prod,'mesa': mesa})
+
+def fecha_venda(request,mesa):
+    venda = Venda.objects.filter(mesa=mesa, situ = 0)
+    form = VendaForm(request.POST or None)
+    total = 0
+    for lista in venda:
+      total = total + (lista.qtd * lista.valor_unit)
+
+    return render(request, 'venda-fecha-form.html', {'venda': venda,'mesa': mesa, 'total':total})
+
+def libera_produto(request,mesa):
+    venda = Venda.objects.filter(mesa=mesa, situ = 0)
+
+    if request.method == 'POST':
+        libera_mesa(venda)
+        return redirect('lista_mesa')
+
+    return render(request, 'venda-fecha-confirm.html',{'mesa': mesa})
+
+def libera_mesa(vendas):
+    for lista in vendas:
+        lista.situ = 1
+        lista.save()
 
 def altera_venda(request,id):
     ven = Venda.objects.get(id=id)
@@ -57,3 +66,16 @@ def deleta_venda(request, id):
         return redirect('lista_Venda')
 
     return render(request, 'ven-delete-confirm.html', {'ven':ven})
+
+def lista_mesa(request):
+    mesa = Mesa.objects.all()
+    return render(request, 'mesa.html', {'mesa': mesa})
+
+def  cria_mesa(request):
+    form = MesaForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('lista_mesa')
+    return render(request, 'mesa-form.html', {'form': form})
+

@@ -13,9 +13,9 @@
 <body>
     <form method="post">
         {% csrf_token %}
-        <h2 class="page-header">Tem certeza que deseja excluir {{prod.nome}} ?</h2>
-        <a href="{% url 'lista_produto' %}" class="btn btn-default">Cancelar</a>
+        <h2 class="page-header">Tem certeza que deseja fechar esta venda? {{prod.nome}} ?</h2>
         <button type="submit" class="btn btn-primary">Confirma</button>
+        <a href="{% url 'fecha_mesa' mesa %}" class="btn btn-default">Cancelar</a>
 
     </form>
 </body>

@@ -43,7 +43,7 @@
     <br>
     <div id="main" class="container-fluid">
 
-        <h1 class="page-header">Lançar produtos mesa: {{ mesa }}</h1>
+        <h1 class="page-header">Lançar produtos mesa: {{ mesa }}. TOTAL: R$ {{ total }}</h1>
 
         <form method="POST">
 
@@ -59,24 +59,21 @@
                                     <tr>
                                         <th>ID Prod</th>
                                         <th>Descrição</th>
-                                        <th>Preço</th>
+                                        <th>Qtd</th>
+                                        <th>Vl Unit</th>
                                         <th class="actions">Ações</th>
                                      </tr>
                                 </thead>
                                 <tbody>
 
-                                    {% for lista in prod %}
+                                    {% for lista in venda %}
 
                                         <tr>
                                             <td> {{ lista.id }}</td>
                                             <td> {{ lista.descricao }} </td>
-                                            <td> {{ lista.preco }} </td>
+                                            <td> {{ lista.qtd }} </td>
+                                            <td> {{ lista.valor_unit }}</td>
                                             <td class="actions">
-                                                <input type="button" class="btn btn-warning btn-xs"  value=" - " onclick="menos( 'quantidade1' )">
-                                                <input type="text" name="quantidade" id="quantidade1" value="0" size="1" readonly="readonly" />
-                                                <input type= "button" class="btn btn-warning btn-xs"  value=" + " onclick="mais( 'quantidade1' )">
-
-                                                <!--<input type="button" class="btn btn-success btn-xs" value="Lançar"> -->
                                                 <button type="submit" class="btn btn-primary">Lancar temp</button>
                                             </td>
                                         </tr>
@@ -87,31 +84,11 @@
 
                         </div>
 
-                    </div> <!-- /#list -->
+                    </div> <!-- /#list  <button type="submit" class="btn btn-primary">Salvar</button>-->
 
-                    <div class="form-group">
+                    {% csrf_token %}
 
-                        {% csrf_token %}
-                        <label >Item:...........</label>
-                            {{ form.item }}
-                            <br>
-                        <label >Mesa:...........</label>
-                            {{ form.mesa }}
-                            <br>
-                        <label >Descrição:......</label>
-                            {{ form.descricao }}
-                            <br>
-                        <label >Qtd:............</label>
-                            {{ form.qtd }}
-                            <br>
-                        <label >V.Unit:.........</label>
-                            {{ form.valor_unit }}
-                            <br>
-                        <label >Situação Ped:...</label>
-                            {{ form.situ }}
-
-                    </div>
-                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a href="{% url 'libera_produto' mesa %}" class="btn btn-primary">Concluir</a>
                     <a href="{% url 'lista_mesa' %}" class="btn btn-default">Cancelar</a>
 
                 </div>
