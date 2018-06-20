@@ -29,6 +29,7 @@ def lista_venda_pedidotemp(Venda,listaPedido, request):
 
 def cria_venda(request,mesa):
     prod = Produto.objects.all()
+    prodLanc = Produto
     form = VendaForm(request.POST or None)
 
     if form.is_valid():

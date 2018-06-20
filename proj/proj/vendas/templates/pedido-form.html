@@ -76,7 +76,8 @@
                                                 <input type="text" name="quantidade" id="quantidade1" value="0" size="1" readonly="readonly" />
                                                 <input type= "button" class="btn btn-warning btn-xs"  value=" + " onclick="mais( 'quantidade1' )">
 
-                                                <input type="button" class="btn btn-success btn-xs" value="Lançar">
+                                                <!--<input type="button" class="btn btn-success btn-xs" value="Lançar"> -->
+                                                <button type="submit" class="btn btn-primary">Lancar temp</button>
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -91,26 +92,29 @@
                     <div class="form-group">
 
                         {% csrf_token %}
-                        <label >Item:</label>
-                            {{form.item}}
+                        <label >Item:...........</label>
+                            {{ form.item }}
                             <br>
-                        <label >Mesa:</label>
+                        <label >Mesa:...........</label>
                             {{ form.mesa }}
                             <br>
-                        <label >Descrição:</label>
+                        <label >Descrição:......</label>
                             {{ form.descricao }}
                             <br>
-                        <label >Qtd:</label>
-                            <br>{{ form.qtd }}
+                        <label >Qtd:............</label>
+                            {{ form.qtd }}
                             <br>
-                        <label >V.Unit:</label>
+                        <label >V.Unit:.........</label>
                             {{ form.valor_unit }}
+                            <br>
+                        <label >Situação Ped:...</label>
+                            {{ form.situ }}
 
                     </div>
                     <button type="submit" class="btn btn-primary">Salvar</button>
                     <a href="{% url 'lista_mesa' %}" class="btn btn-default">Cancelar</a>
 
-                    </div>
+                </div>
             </div>
         </form>
     </div>
