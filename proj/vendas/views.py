@@ -107,3 +107,5 @@ def  cria_mesa(request):
         form.save()
         return redirect('lista_mesa')
     return render(request, 'mesa-form.html', {'form': form})
+
+
