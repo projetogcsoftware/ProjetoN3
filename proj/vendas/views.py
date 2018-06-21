@@ -20,9 +20,12 @@ def lista_venda_pedidotemp(Venda,listaPedido, request):
 def cria_venda(request,mesa):
     prod = Produto.objects.all()
     form = VendaForm(request.POST or None)
-
+    obj_mesa = Mesa.objects.get(id=mesa)
+    obj_mesa.situ = 1
     if form.is_valid():
         form.save()
+        obj_mesa.save()
+
         return redirect(reverse(('cria_venda'), kwargs={'mesa': mesa}))
     return render(request, 'pedido-form.html', {'form': form,'prod': prod,'mesa': mesa})
 
@@ -37,17 +40,22 @@ def fecha_venda(request,mesa):
 
 def libera_produto(request,mesa):
     venda = Venda.objects.filter(mesa=mesa, situ = 0)
+    obj_mesa  = Mesa.objects.get(id=mesa)
 
     if request.method == 'POST':
-        libera_mesa(venda)
+        altera_situ(venda,obj_mesa)
         return redirect('lista_mesa')
 
     return render(request, 'venda-fecha-confirm.html',{'mesa': mesa})
 
-def libera_mesa(vendas):
+def altera_situ(vendas,mesa):
+
     for lista in vendas:
         lista.situ = 1
         lista.save()
+
+    mesa.situ = 0
+    mesa.save()
 
 def altera_venda(request,id):
     ven = Venda.objects.get(id=id)
