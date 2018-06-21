@@ -2,6 +2,27 @@ from django.shortcuts import render,redirect,reverse
 from produtos.models import Produto
 from .forms import VendaForm,MesaForm
 from .models import Venda,Mesa
+from django.http import HttpResponse
+from reportlab.pdfgen import canvas
+
+def some_view(request):
+    # Crie o objeto HttpResponse com o cabeçalho de PDF apropriado.
+    response = redirect(mimetype='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=somefilename.pdf'
+    reponse = redirect()
+
+    # Crie o objeto PDF, usando o objeto response como seu "arquivo".
+    p = canvas.Canvas(response)
+
+    # Desenhe coisas no PDF. Aqui é onde a geração do PDF acontece.
+    # Veja a documentação do ReportLab para a lista completa de
+    # funcionalidades.
+    p.drawString(100, 100, "Hello world.")
+
+    # Feche o objeto PDF, e está feito.
+    p.showPage()
+    p.save()
+    return response
 
 def lista_venda(request):
     prod =  Produto.objects.all()
@@ -40,10 +61,10 @@ def fecha_venda(request,mesa):
 
 def libera_produto(request,mesa):
     venda = Venda.objects.filter(mesa=mesa, situ = 0)
-    obj_mesa  = Mesa.objects.get(id=mesa)
+    mesa  = Mesa.objects.get(id=mesa)
 
     if request.method == 'POST':
-        altera_situ(venda,obj_mesa)
+        altera_situ(venda,mesa)
         return redirect('lista_mesa')
 
     return render(request, 'venda-fecha-confirm.html',{'mesa': mesa})
@@ -86,4 +107,3 @@ def  cria_mesa(request):
         form.save()
         return redirect('lista_mesa')
     return render(request, 'mesa-form.html', {'form': form})
-
