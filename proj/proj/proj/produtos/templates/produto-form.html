@@ -5,13 +5,14 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Informações - Usuario</title>
+    <title>Informações - Prod</title>
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
 
 </head>
 <body>
+
 
     <script src="//maxcdn.bootstrapcdn.com/js/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/js/bootstrap.min.js"></script>
@@ -29,10 +30,11 @@
         </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{% url 'lista_mesta' %}">Lançar Pedido</a></li>
+                    <li><a href="#">Lançar Pedido</a></li>
                     <li><a href="{% url 'lista_produto' %}">Produtos</a></li>
-                    <li><a href="{% url 'lista_usuario' %}">Clientes</a></li>
+                    <li><a href="#">Clientes</a></li>
                     <li><a href="#">Logof</a></li>
+                    <li><a href="#">Fechar Conta</a></li>
                     <li><a href="#">Sair</a></li>
                 </ul>
             </div>
@@ -41,7 +43,7 @@
     <br>
     <div id="main" class="container-fluid">
 
-        <h1 class="page-header">Criar / Alterar Usuario</h1>
+        <h1 class="page-header">Criar / Alterar Produtos</h1>
 
         <form method="POST">
 
@@ -53,9 +55,9 @@
                     {{ form }}
 
                     <button type="submit" class="btn btn-primary">Salvar</button>
-                    <a href="{% url 'lista_usuario' %}" class="btn btn-default">Cancelar</a>
+                    <a href="{% url 'lista_produto' %}" class="btn btn-default">Cancelar</a>
                     {% if prod %}
-                        <a href="{% url 'deleta_usuario' prod.id" class="btn btn-default">Deletar</a>
+                        <a href="{% url 'deleta_produto' prod.id %}" class="btn btn-default">Deletar</a>
                     {% endif %}
                 </div>
 

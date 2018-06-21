@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Informações - Prod</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+
+    <script src="//maxcdn.bootstrapcdn.com/js/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/js/bootstrap.min.js"></script>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Sistema de Comanda</a>
+        </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Lançar Pedido</a></li>
+                    <li><a href="{% url 'lista_produto' %}">Produtos</a></li>
+                    <li><a href="#">Clientes</a></li>
+                    <li><a href="#">Logof</a></li>
+                    <li><a href="#">Fechar Conta</a></li>
+                    <li><a href="#">Sair</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <div id="main" class="container-fluid">
+
+        <h1 class="page-header">Lançar produtos mesa: {{ mesa }}. TOTAL: R$ {{ total }}</h1>
+
+        <form method="POST">
+
+            <hr />
+            <div id="actions" class="row">
+                <div class="col-md-12">
+
+                    <div id="list" class="row">
+
+                        <div class="table-responsive col-md-12">
+                            <table class="table table-striped" cellspacing="0" cellpadding="0">
+                                <thead>
+                                    <tr>
+                                        <th>ID Prod</th>
+                                        <th>Descrição</th>
+                                        <th>Qtd</th>
+                                        <th>Vl Unit</th>
+                                        <th class="actions">Ações</th>
+                                     </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% for lista in venda %}
+
+                                        <tr>
+                                            <td> {{ lista.id }}</td>
+                                            <td> {{ lista.descricao }} </td>
+                                            <td> {{ lista.qtd }} </td>
+                                            <td> {{ lista.valor_unit }}</td>
+                                            <td class="actions">
+                                                <button type="submit" class="btn btn-primary">Lancar temp</button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div> <!-- /#list  <button type="submit" class="btn btn-primary">Salvar</button>-->
+
+                    {% csrf_token %}
+
+                    <a href="{% url 'libera_produto' mesa %}" class="btn btn-primary">Concluir</a>
+                    <a href="{% url 'lista_mesa' %}" class="btn btn-default">Cancelar</a>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+
+        function id( el ){
+            return document.getElementById( el );
+        }
+        function menos( id_qnt ) {
+            var qnt = parseInt( id( id_qnt ).value );
+            if( qnt > 0 )
+            id( id_qnt ).value = qnt - 1;
+        }
+        function mais( id_qnt ){
+            id( id_qnt ).value = parseInt( id( id_qnt ).value ) + 1;
+        }
+
+    </script>
+
+</body>
+</html>

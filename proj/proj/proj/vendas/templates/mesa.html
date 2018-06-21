@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CRUD de teste</title>
 
+
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
 
@@ -28,10 +29,11 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{% url 'lista_mesta' %}">Lançar Pedido</a></li>
+                        <li><a href="#">Lançar Pedido</a></li>
                         <li><a href="{% url 'lista_produto' %}">Produtos</a></li>
-                        <li><a href="{% url 'lista_usuario' %}">Clientes</a></li>
+                        <li><a href="{% url 'lista_produto' %}">Clientes</a></li>
                         <li><a href="#">Logof</a></li>
+                        <li><a href="#">Fechar Conta</a></li>
                         <li><a href="#">Sair</a></li>
                     </ul>
                 </div>
@@ -41,29 +43,13 @@
         <br>
         <div id="main" class="container-fluid">
 
-            <h1 class="page-header">Produtos</h1>
+            <h1 class="page-header">Venda </h1>
 
             <div id="top" class="row">
                 <div class="col-md-3">
                     <h2>Itens</h2>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="input-group h2">
-                        <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar Itens">
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="submit" href="{% url 'lista_produto_nome' %}" >
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
                     </div>
-                </div>
-
-                <div class="col-md-3">
-                    <a href="{% url 'cria_produto' %}" class="btn btn-primary pull-right h2">Novo Item</a>
-                </div>
             </div>
-
 
             <div id="list" class="row">
 
@@ -71,31 +57,32 @@
                     <table class="table table-striped" cellspacing="0" cellpadding="0">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>Descrição</th>
-                                <th>Preço</th>
+                                <th>N° Mesa</th>
                                 <th class="actions">Ações</th>
                              </tr>
                         </thead>
                         <tbody>
-                            {% for lista in prod %}
-                                <tr>
 
-                                    <td> {{ lista.id }}</td>
-                                    <td> {{ lista.nome }} </td>
-                                    <td> {{ lista.descricao }}</td>
-                                    <td> {{ lista.preco }} </td>
+                            {% for lista in mesa %}
+
+                                <tr>
+                                    <td> {{ lista.numero }}</td>
 
                                     <td class="actions">
-                                        <a class="btn btn-success btn-xs" href="{% url 'altera_produto' lista.id %}">Editar</a>
-                                        <a class="btn btn-warning btn-xs" href="{% url 'altera_produto' lista.id %}">Visualisar</a>
-                                        <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
+                                        {% if lista.situ == 0 %}
+                                            <a class="btn btn-success btn-xs" href="{% url 'cria_venda' lista.numero %}">Abrir </a>
+                                        {% endif %}
+                                        {% if lista.situ == 1 %}
+                                            <a class="btn btn-warning btn-xs" href="{% url 'cria_venda' lista.numero %}">Lançar </a>
+                                            <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Fechar</a>
+                                        {% endif %}
+
                                     </td>
                                 </tr>
                             {% endfor %}
                         </tbody>
-                     </table>
+
+                    </table>
 
                  </div>
              </div> <!-- /#list -->
@@ -103,4 +90,5 @@
         </div>
 
     </body>
+
 </html>

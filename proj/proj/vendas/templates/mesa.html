@@ -74,7 +74,7 @@
                                         {% endif %}
                                         {% if lista.situ == 1 %}
                                             <a class="btn btn-warning btn-xs" href="{% url 'cria_venda' lista.numero %}">Lançar </a>
-                                            <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Fechar</a>
+                                            <a class="btn btn-danger btn-xs"  href="{% url 'fecha_venda' lista.numero %}" data-toggle="modal" data-target="#delete-modal">Fechar</a>
                                         {% endif %}
 
                                     </td>
