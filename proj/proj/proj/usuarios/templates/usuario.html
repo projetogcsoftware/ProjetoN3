@@ -7,8 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CRUD de teste</title>
 
+
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
+
 
 </head>
     <body>
@@ -28,10 +30,11 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{% url 'lista_mesta' %}">Lançar Pedido</a></li>
+                        <li><a href="#">Lançar Pedido</a></li>
                         <li><a href="{% url 'lista_produto' %}">Produtos</a></li>
-                        <li><a href="{% url 'lista_usuario' %}">Clientes</a></li>
+                        <li><a href="{% url 'lista_produto' %}">Clientes</a></li>
                         <li><a href="#">Logof</a></li>
+                        <li><a href="#">Fechar Conta</a></li>
                         <li><a href="#">Sair</a></li>
                     </ul>
                 </div>
@@ -41,7 +44,7 @@
         <br>
         <div id="main" class="container-fluid">
 
-            <h1 class="page-header">Produtos</h1>
+            <h1 class="page-header">Usuarios</h1>
 
             <div id="top" class="row">
                 <div class="col-md-3">
@@ -52,7 +55,7 @@
                     <div class="input-group h2">
                         <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar Itens">
                         <span class="input-group-btn">
-                            <button class="btn btn-primary" type="submit" href="{% url 'lista_produto_nome' %}" >
+                            <button class="btn btn-primary" type="submit" href="" >
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </span>
@@ -60,7 +63,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <a href="{% url 'cria_produto' %}" class="btn btn-primary pull-right h2">Novo Item</a>
+                    <a href="{% url 'cria_usuario' %}" class="btn btn-primary pull-right h2">Novo Item</a>
                 </div>
             </div>
 
@@ -73,23 +76,23 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nome</th>
-                                <th>Descrição</th>
-                                <th>Preço</th>
+                                <th>CPF</th>
+                                <th>Endereço</th>
                                 <th class="actions">Ações</th>
                              </tr>
                         </thead>
                         <tbody>
-                            {% for lista in prod %}
+                            {% for lista in usu%}
                                 <tr>
 
                                     <td> {{ lista.id }}</td>
                                     <td> {{ lista.nome }} </td>
-                                    <td> {{ lista.descricao }}</td>
-                                    <td> {{ lista.preco }} </td>
+                                    <td> {{ lista.cpf }} </td>
+                                    <td> {{ lista.endereco }}</td>
 
                                     <td class="actions">
-                                        <a class="btn btn-success btn-xs" href="{% url 'altera_produto' lista.id %}">Editar</a>
-                                        <a class="btn btn-warning btn-xs" href="{% url 'altera_produto' lista.id %}">Visualisar</a>
+                                        <a class="btn btn-success btn-xs" href="{% url 'altera_usuario' lista.id %}">Editar</a>
+                                        <a class="btn btn-warning btn-xs" href="{% url 'altera_usuario' lista.id %}">Visualisar</a>
                                         <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
                                     </td>
                                 </tr>
